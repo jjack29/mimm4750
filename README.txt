@@ -21,11 +21,12 @@ Data Pipeline for MIMM 4750G final project
         - Output: nucleoprotein.fa, phosphoprotein.fa, matrix.fa, glycoprotein.fa, polymerase.fa
             - Note, each one contains 430 sequences (one from each sample)
         - Code: python script adapted from Dr. Art Poon's extract_spike.py script for each protein scripts
-            $ extract_nucleoprotein.py
-            $ extract_phosphoprotein.py
-            $ extract_matrix.py
-            $ extract_glycoprotein.py
-            $ extract_polymerase.py
+            $ python3 pyScripts/extract_protein.py query.gb query.cds.fa nucleoprotein > nucleoprotein.fa
+            $ python3 pyScripts/extract_protein.py query.gb query.cds.fa phosphoprotein > phosphoprotein.fa
+            $ python3 pyScripts/extract_protein.py query.gb query.cds.fa matrix > matrix.fa
+            $ python3 pyScripts/extract_protein.py query.gb query.cds.fa glycoprotein > glycoprotein.fa
+            $ python3 pyScripts/extract_protein.py query.gb query.cds.fa polymerase > polymerase.fa
+            
     
     2.b) Translate the nucleotide sequences, then perform multiple sequence alignment using MAFFT
         - Input: nucleoprotein.fa, phosphoprotein.fa, matrix.fa, glycoprotein.fa, polymerase.fa
