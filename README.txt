@@ -45,13 +45,14 @@ Data Pipeline for MIMM 4750G final project
         - Code: a python script was adapted from Dr. Art Poon's codon_align.py script to shorten header to host organism
             $ python3 pyScripts/codon_align.py xyz_AA.mafft.fa xyz.fa > xyz.codon.fa
             
-    2.d) FastTree is used to reconstruct a maximum likelihood tree from the alignment just created
+    2.d) iqtree performs model selection and produces a phylogenetic tree
         - Input: nucleoprotein.codon.fa, phosphoprotein.codon.fa, matrix.codon.fa, glycoprotein.codon.fa, polymerase.codon.fa
-        - Output: nucleoprotein.nwk, phosphoprotein.nwk, matrix.nwk, glycoprotein.nwk, polymerase.nwk
+        - Output: nucleoprotein.nwk, phosphoprotein.nwk, matrix.nwk, glycoprotein.nwk, polymerase.nwk, nucleoprotein.iqtree, phosphoprotein.iqtree, matrix.iqtree, glycoprotein.iqtree, polymerase.iqtree
         - Code: 
-            $ fasttree -quote -nt xyz.codon.fa > xyz.nwk
+            $ iqtree -s xyz.condon.fa -pre xyz
+            .iqtree and .treefile files are kept as xyz.iqtree and xyz.nwk (all other files produced are deleted)
 
-    2.e) Data reduction: create a reduced tree by progressively removing the shortest branches until we reach 100 tips
+    2.e) Data reduction: create a reduced tree by progressively removing the shortest branches until we reach 70 tips
         - Input: 
             nucleoprotein.nwk, phosphoprotein.nwk, matrix.nwk, glycoprotein.nwk, polymerase.nwk
             nucleoprotein.codon.fa, phosphoprotein.codon.fa, matrix.codon.fa, glycoprotein.codon.fa, polymerase.codon.fa
@@ -59,18 +60,8 @@ Data Pipeline for MIMM 4750G final project
             nucleoprotein.red.nwk, phosphoprotein.red.nwk, matrix.red.nwk, glycoprotein.red.nwk, polymerase.red.nwk
             nucleoprotein.red.fa, phosphoprotein.red.fa, matrix.red.fa, glycoprotein.red.fa, polymerase.red.fa
         - Code: a python script created by Dr. Art Poon called prune-tips.py was used
-            $ python3 pyScripts/prune-tips.py xyz.nwk xyz.codon.fa 100 xyz.red.nwk xyz.red.fa        
-
-    2.f) HyPhy was used to calculate dNdS for reduced trees
-        - Input: 
-            nucleoprotein.nwk, phosphoprotein.nwk, matrix.nwk, glycoprotein.nwk, polymerase.nwk
-            nucleoprotein.codon.fa, phosphoprotein.codon.fa, matrix.codon.fa, glycoprotein.codon.fa, polymerase.codon.fa
-        - Output: FUBAR report
+            $ python3 pyScripts/prune-tips.py xyz.nwk xyz.codon.fa 70 xyz.red.nwk xyz.red.fa        
 
 3) Visualization:
     - FigTree was used to visualize the .nwk files
-
-
-
-
-
+    - Jalview was used to visualize conservation
